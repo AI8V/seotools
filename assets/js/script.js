@@ -991,7 +991,7 @@ const exportedModules = (function () {
                 taskElement.className = 'list-group-item';
                 taskElement.innerHTML = `
                     <div class="d-flex w-100 justify-content-between align-items-center">
-                        <h5 class="mb-1 h6"><i class="bi ${task.priority.icon} ms-2 text-${task.priority.color}"></i> ${task.description}</h5>
+                        <h3 class="mb-1 h6"><i class="bi ${task.priority.icon} ms-2 text-${task.priority.color}"></i> ${task.description}</h5>
                         <small><span class="badge bg-${task.priority.color}">${task.priority.label}</span></small>
                     </div>
                     <p class="mb-1 small">
