@@ -1,0 +1,31 @@
+# التبعيات
+/node_modules
+
+# ملفات نظام التشغيل
+.DS_Store
+Thumbs.db
+
+# ملفات السجلات (Logs)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# مجلدات البناء أو التوزيع (إذا كنت ستستخدمها لاحقًا)
+# /dist
+# /build
+# /out
+
+# ملفات بيئة العمل (IDE) ومحررات الأكواد
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# ملفات أخرى خاصة بمشاريع Node.js (اختياري لكن جيد)
+.npm
+.eslintcache
+.env
+.env.*.local
+.env.local
