@@ -432,40 +432,132 @@ const exportedModules = (function () {
             DOM.dom.liveCounter.classList.toggle('d-none', count === 0);
             if (count > 0) DOM.dom.counterValue.textContent = count;
         };
-        const renderChart = (chartInstance, context, config) => {
-            if (chartInstance) { chartInstance.data.labels = config.data.labels; chartInstance.data.datasets = config.data.datasets; chartInstance.update(); return chartInstance; }
-            return new Chart(context, config);
-        };
-        
-        function updateAnalyticsDashboard() {
-            if (!DOM.dom.showAnalyticsBtn) return; // حماية
+                const renderChart = (chartInstance, context, config) => {
 
-            const hasData = State.appState.searchIndex && State.appState.searchIndex.length > 0;
-            DOM.dom.showAnalyticsBtn.classList.toggle('d-none', !hasData);
-            if (!hasData) {
-                if (sourceChartInstance) sourceChartInstance.destroy(); if (keywordsChartInstance) keywordsChartInstance.destroy(); if (seoScoreChartInstance) seoScoreChartInstance.destroy();
-                sourceChartInstance = keywordsChartInstance = seoScoreChartInstance = null; return;
+                    if (!config || !config.data) {
+                console.error('RenderChart: Invalid chart configuration provided.', config);
+                if (chartInstance) {
+                    try {
+                        chartInstance.destroy();
+                    } catch (e) { console.error("Error destroying chart instance on invalid config:", e); }
+                }
+                return null; 
+            }
+
+            config.data.labels = Array.isArray(config.data.labels) ? config.data.labels : [];
+
+            if (Array.isArray(config.data.datasets)) {
+                config.data.datasets.forEach(dataset => {
+                    dataset.data = Array.isArray(dataset.data) ? dataset.data : [];
+                });
+            } else {
+                config.data.datasets = [];
             }
             
+            if (chartInstance) {
+                chartInstance.data.labels = config.data.labels;
+                chartInstance.data.datasets = config.data.datasets;
+                try {
+                    chartInstance.update();
+                } catch (e) {
+                    console.error("RenderChart: Error updating chart:", e, { chartId: chartInstance.canvas.id, data: config.data });
+                }
+                return chartInstance;
+            }
+            
+            try {
+                if (!context) {
+                    console.error("RenderChart: Canvas context is null or undefined.");
+                    return null;
+                }
+                return new Chart(context, config);
+            } catch (e) {
+                console.error("RenderChart: Error creating new chart:", e, { canvasId: context && context.canvas ? context.canvas.id : 'unknown', data: config.data });
+                return null;
+            }
+        };
+        
+                function updateAnalyticsDashboard() {
+            if (!DOM.dom.showAnalyticsBtn || !DOM.dom.sourceDistributionChart || !DOM.dom.topKeywordsChart || !DOM.dom.averageSeoScoreChart || !DOM.dom.seoScoreText || !DOM.dom.orphanPagesCard || !DOM.dom.orphanPagesCount) {
+                return;
+            }
+            
+            const hasData = State.appState.searchIndex && State.appState.searchIndex.length > 0;
+            DOM.dom.showAnalyticsBtn.classList.toggle('d-none', !hasData);
+
+            if (!hasData) {
+                if (sourceChartInstance) { try { sourceChartInstance.destroy(); } catch(e){} sourceChartInstance = null; }
+                if (keywordsChartInstance) { try { keywordsChartInstance.destroy(); } catch(e){} keywordsChartInstance = null; }
+                if (seoScoreChartInstance) { try { seoScoreChartInstance.destroy(); } catch(e){} seoScoreChartInstance = null; }
+                DOM.dom.orphanPagesCard.classList.add('d-none');
+                return;
+            }
+
             const lightColor = '#495057';
             const darkColor = 'rgba(255, 255, 255, 0.85)';
             const themeColor = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? darkColor : lightColor;
-            
-            const sourceCounts = State.appState.searchIndex.reduce((acc, item) => { const source = item.source || 'unknown'; acc[source] = (acc[source] || 0) + 1; return acc; }, {});
+
+            const sourceCounts = State.appState.searchIndex.reduce((acc, item) => {
+                const source = item.source || 'unknown';
+                acc[source] = (acc[source] || 0) + 1;
+                return acc;
+            }, {});
             const sourceLabelsMap = { 'seo_crawler': `زاحف SEO`, 'html_analysis': `تحليل HTML`, 'manual': `إدخال يدوي`, 'url_generation': `من الروابط`, 'sitemap': `من Sitemap`, 'robots': `من robots.txt`, 'unknown': 'غير معروف' };
-            sourceChartInstance = renderChart(sourceChartInstance, DOM.dom.sourceDistributionChart.getContext('2d'), { type: 'pie', data: { labels: Object.keys(sourceCounts).map(l => sourceLabelsMap[l] || l), datasets: [{ label: 'عدد الصفحات', data: Object.values(sourceCounts), backgroundColor: ['#4bc0c0', '#ff6384', '#ffcd56', '#36a2eb', '#9966ff', '#c9cbcf', '#ff9f40'] }] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: themeColor, boxWidth: 12, padding: 15 } } } } });
+            const sourceLabels = Object.keys(sourceCounts).map(l => sourceLabelsMap[l] || l) || [];
+            const sourceData = Object.values(sourceCounts) || [];
             
+            sourceChartInstance = renderChart(sourceChartInstance, DOM.dom.sourceDistributionChart.getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: sourceLabels,
+                    datasets: [{
+                        label: 'عدد الصفحات',
+                        data: sourceData,
+                        backgroundColor: ['#4bc0c0', '#ff6384', '#ffcd56', '#36a2eb', '#9966ff', '#c9cbcf', '#ff9f40']
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: themeColor, boxWidth: 12, padding: 15 } } } }
+            });
+
             const allKeywords = State.appState.searchIndex.flatMap(item => item.tags || []);
             const keywordCount = allKeywords.reduce((acc, keyword) => { if (keyword) acc[keyword] = (acc[keyword] || 0) + 1; return acc; }, {});
             const sortedKeywords = Object.entries(keywordCount).sort((a, b) => b[1] - a[1]).slice(0, 10);
-            keywordsChartInstance = renderChart(keywordsChartInstance, DOM.dom.topKeywordsChart.getContext('2d'), { type: 'bar', data: { labels: sortedKeywords.map(e => e[0]), datasets: [{ label: 'عدد التكرارات', data: sortedKeywords.map(e => e[1]), backgroundColor: 'rgba(75, 192, 192, 0.6)' }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: themeColor } }, y: { ticks: { color: themeColor } } } } });
-            
+            const keywordLabels = sortedKeywords.map(e => e[0]) || [];
+            const keywordData = sortedKeywords.map(e => e[1]) || [];
+
+            keywordsChartInstance = renderChart(keywordsChartInstance, DOM.dom.topKeywordsChart.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: keywordLabels,
+                    datasets: [{
+                        label: 'عدد التكرارات',
+                        data: keywordData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    }]
+                },
+                options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: themeColor } }, y: { ticks: { color: themeColor } } } }
+            });
+
             let totalScore = 0, maxPossibleScore = 0;
             State.appState.searchIndex.forEach(item => { const { score, maxScore } = Analyzer.calculateSeoScore(item.seo); totalScore += score; maxPossibleScore += maxScore; });
             const avgPercentage = maxPossibleScore > 0 ? (totalScore / maxPossibleScore) * 100 : 0;
+            
             DOM.dom.seoScoreText.textContent = `${Math.round(avgPercentage)}%`;
             const scoreColor = avgPercentage >= 80 ? '#4bc0c0' : avgPercentage >= 50 ? '#ffcd56' : '#ff6384';
-            seoScoreChartInstance = renderChart(seoScoreChartInstance, DOM.dom.averageSeoScoreChart.getContext('2d'), { type: 'doughnut', data: { datasets: [{ data: [avgPercentage, 100 - avgPercentage], backgroundColor: [scoreColor, 'rgba(128, 128, 128, 0.2)'], circumference: 180, rotation: 270, cutout: '75%' }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { tooltip: { enabled: false } } } });
+            
+            seoScoreChartInstance = renderChart(seoScoreChartInstance, DOM.dom.averageSeoScoreChart.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [avgPercentage, 100 - avgPercentage], // هذه دائمًا مصفوفة من رقمين
+                        backgroundColor: [scoreColor, 'rgba(128, 128, 128, 0.2)'],
+                        circumference: 180,
+                        rotation: 270,
+                        cutout: '75%'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { tooltip: { enabled: false } } }
+            });
             
             const orphanCount = State.appState.searchIndex.filter(item => item.seo?.isOrphan).length;
             DOM.dom.orphanPagesCard.classList.toggle('d-none', orphanCount === 0);
