@@ -304,6 +304,11 @@
     color: var(--bs-secondary-color) !important;
 }
 
+/* Small spacing adjustment for the moved analytics button */
+#showAnalyticsBtn {
+    margin-inline-start: 1rem;
+}
+
 [data-bs-theme="dark"] .text-muted {
     color: var(--bs-tertiary-color) !important;
 }
