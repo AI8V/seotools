@@ -3,11 +3,9 @@
 /**
  * @jest-environment jsdom
  */
-// ✅ تعديل طريقة الاستيراد لتناسب الهيكل الجديد
 const { ComparisonEngine } = require('../assets/js/ComparisonEngine.js');
 
 describe('ComparisonEngine Module', () => {
-    // ... (لا تغيير في بيانات الاختبار)
     const projectA = [
         { id: 1, url: '/home', title: 'Home', seo: { score: 5 } },
         { id: 2, url: '/about', title: 'About Us', seo: { score: 4 } },
@@ -22,7 +20,6 @@ describe('ComparisonEngine Module', () => {
     ];
 
     it('should correctly calculate summary statistics', () => {
-        // ✅ تعديل طريقة الاستدعاء
         const result = ComparisonEngine.compare(projectA, projectB);
         expect(result.summary.pagesBefore).toBe(4);
         expect(result.summary.pagesAfter).toBe(4);
