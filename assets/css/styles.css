@@ -284,6 +284,24 @@
 
 /* --- Accessibility & Print Fixes --- */
 
+.btn-outline-info {
+  --bs-btn-color: var(--bs-info-text-emphasis);
+  --bs-btn-border-color: var(--bs-info-border-subtle);
+  --bs-btn-hover-bg: var(--bs-info-bg-subtle);
+  --bs-btn-hover-border-color: var(--bs-info-border-subtle);
+  --bs-btn-active-bg: var(--bs-info-bg-subtle);
+  --bs-btn-active-color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .btn-outline-info {
+    --bs-btn-color: var(--bs-info-text-emphasis);
+    --bs-btn-border-color: var(--bs-info-border-subtle);
+    --bs-btn-hover-color: var(--bs-black);
+    --bs-btn-hover-bg: var(--bs-info);
+    --bs-btn-active-bg: var(--bs-info);
+    --bs-btn-active-color: var(--bs-black);
+}
+
 .btn-outline-secondary {
   --bs-btn-color: var(--bs-secondary-text-emphasis);
   --bs-btn-border-color: var(--bs-secondary-border-subtle);
