@@ -276,21 +276,23 @@ function renderSeoSummary(seo, itemId) {
                 const collapseId = `collapse-source-${source.replace(/[^a-zA-Z0-9]/g, '-')}-${index}`;
                 const shouldBeOpen = openAccordionId ? (collapseId === openAccordionId) : index === 0;
                 renderAccordionGroup(source, items, index, shouldBeOpen);
-                if (shouldBeOpen) {
-                    const accordionBody = DOM.dom.resultsAccordion.querySelector(`#${collapseId} .accordion-body`);
-                    if (accordionBody) { renderItemChunk(accordionBody, items, 0); }
-                }
+                //if (shouldBeOpen) {
+                 //   const accordionBody = DOM.dom.resultsAccordion.querySelector(`#${collapseId} .accordion-body`);
+                   // if (accordionBody) { renderItemChunk(accordionBody, items, 0); }
+               // }
             });
             updateSelectionUI();
         }
-        const handleAccordionShow = (event) => {
-            const accordionBody = event.target.querySelector('.accordion-body');
-            if (!accordionBody) return;
-            const hasBeenRendered = parseInt(accordionBody.dataset.renderedCount, 10) > 0;
-            if (!hasBeenRendered) {
+                const handleAccordionShow = (event) => {
+                    const accordionBody = event.target.querySelector('.accordion-body');
+                    if (!accordionBody) return;
+                    const hasBeenRendered = parseInt(accordionBody.dataset.renderedCount, 10) > 0;
+                    if (!hasBeenRendered) {
                 const source = accordionBody.dataset.source;
                 const items = (getFilterState().keyword || getFilterState().category || getFilterState().isOrphan ? State.appState.filteredResults : State.appState.searchIndex).filter(item => (item.source || 'unknown') === source);
-                if(items.length > 0) { renderItemChunk(accordionBody, items, 0); }
+                if(items.length > 0) {
+                    renderItemChunk(accordionBody, items, 0);
+                }
             }
         };
         function getCurrentActiveItemsList() {
