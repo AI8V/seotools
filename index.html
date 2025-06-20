@@ -31,8 +31,8 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self'; 
-        script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; 
-        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+        script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; 
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com;
         img-src 'self' data: https://assets9.lottiefiles.com;
         font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com;
         connect-src 'self' https://api.allorigins.win https://assets9.lottiefiles.com;
@@ -43,7 +43,7 @@
         form-action 'self';
     ">
 
-    <!-- Structured Data (JSON-LD) - Combined & Cleaned -->
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,20 +53,12 @@
           "name": "Ai8V - Mind & Machine",
           "url": "https://ai8v.github.io/search-index-json/",
           "logo": "https://ai8v.github.io/search-index-json/assets/img/logo.png",
-          "sameAs": [
-            "https://x.com/AmrAbssalam",
-            "https://www.linkedin.com/in/amrabdelsalam87/",
-            "https://facebook.com/ABO.OMAR7102023"
-          ]
+          "sameAs": ["https://x.com/AmrAbssalam", "https://www.linkedin.com/in/amrabdelsalam87/", "https://facebook.com/ABO.OMAR7102023"]
         },
         {
           "@type": "WebSite",
           "url": "https://ai8v.github.io/search-index-json/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://ai8v.github.io/search-index-json/search.html?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+          "potentialAction": { "@type": "SearchAction", "target": "https://ai8v.github.io/search-index-json/search.html?q={search_term_string}", "query-input": "required name=search_term_string" }
         },
         {
           "@type": "SoftwareApplication",
@@ -74,37 +66,27 @@
           "operatingSystem": "Web-based",
           "applicationCategory": "DeveloperApplication",
           "url": "https://ai8v.github.io/search-index-json/",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "88"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Ai8V - Mind & Machine"
-          }
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "88" },
+          "publisher": { "@type": "Organization", "name": "Ai8V - Mind & Machine" }
         }
       ]
     }
     </script>
     
-    <!-- Stylesheets -->
+   <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/aos.min.css">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></noscript>
+    <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-<button id="darkModeToggle" class="dark-mode-toggle position-fixed top-0 start-0 m-3 z-3 rounded-pill py-2 px-3 border-0 text-white shadow-sm d-flex align-items-center gap-2 d-print-none" aria-label="تبديل الوضع الليلي"></button>
+<button id="darkModeToggle" class="dark-mode-toggle position-fixed top-0 start-0 m-3 z-3 rounded-pill py-2 px-3 border-0 text-white shadow-sm d-flex align-items-center gap-2 d-print-none" type="button" aria-label="تبديل الوضع الليلي"></button>
 <div class="fw-bold text-white shadow-sm d-none d-print-none d-flex align-items-center live-counter position-fixed rounded-pill py-2 px-3 z-2 gap-2" id="liveCounter" style="top:80px;left:20px;"><i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i><span>العناصر: <span id="counterValue">0</span></span></div>
 <main class="d-print-none container mt-5 pt-4">
-    <h1 class="display-6 d-flex justify-content-center align-items-center mb-4 pb-5 mt-5"><i class="bi bi-search ms-3" aria-hidden="true"></i><span class="mx-2">Mind &amp; Machine</span><span class="badge fs-6 ultimate-badge me-4">Ultimate</span></h1>
+    <h1 class="display-6 d-flex justify-content-center align-items-center mb-4 pb-5 mt-5"><i class="bi bi-search ms-3" aria-hidden="true"></i><span class="mx-2">Mind & Machine</span><span class="badge fs-6 ultimate-badge me-4">Ultimate</span></h1>
     <div class="row g-4">
         <div class="col-lg-6">
             <div class="card h-100 shadow-sm">
@@ -114,13 +96,13 @@
                 <div class="card-body overflow-y-auto">
                     <div class="seo-crawler-section rounded-3 p-3 my-3">
                         <h3 class="h6"><i class="bi bi-robot ms-2" aria-hidden="true"></i>زاحف SEO وتحليل الموقع <span class="badge ultimate-badge me-5">جديد</span></h3>
-                        <div class="input-group mb-2"><input class="form-control" type="url" aria-label="رابط الموقع للزحف" dir="ltr" id="seoCrawlerUrl" placeholder="https://example.com"><button class="btn btn-dark me-2" id="startCrawlerBtn" type="button"><i class="bi bi-rocket-takeoff-fill ms-2" aria-hidden="true"></i>زحف وتحليل</button></div>
+                        <div class="input-group mb-2"><input class="form-control" type="url" aria-label="رابط الموقع للزحف" dir="ltr" id="seoCrawlerUrl" placeholder="https://example.com"><button class="btn btn-dark me-2" id="startCrawlerBtn" type="button" aria-label="بدء الزحف والتحليل"><i class="bi bi-rocket-takeoff-fill ms-2" aria-hidden="true"></i>زحف وتحليل</button></div>
                         <div class="row g-2 mb-2">
                             <div class="col-sm-4"><label class="form-label small" for="seoCrawlerDepth">أقصى عمق</label><input class="form-control form-control-sm text-center" type="number" aria-label="عمق الزحف" id="seoCrawlerDepth" max="10" min="0" title="عمق الزحف (0 = الصفحة الحالية فقط)" value="1"></div>
                             <div class="col-sm-4"><label class="form-label small" for="seoCrawlerConcurrency">طلبات متوازية</label><input class="form-control form-control-sm text-center" type="number" aria-label="الطلبات المتوازية" id="seoCrawlerConcurrency" max="10" min="1" title="عدد الطلبات التي يتم إرسالها في نفس الوقت" value="3"></div>
                             <div class="col-sm-4"><label class="form-label small" for="seoCrawlerDelay">التأخير (ms)</label><input class="form-control form-control-sm text-center" type="number" aria-label="التأخير بين الطلبات" id="seoCrawlerDelay" min="0" step="50" title="التأخير بالمللي ثانية بين كل طلب (لكل عامل متوازي)" value="100"></div>
                         </div>
-                        <div class="form-check form-switch mb-2"><input type="checkbox" checked="" class="form-check-input" id="seoCrawlerNoSaveHtml" role="switch"><label class="form-check-label small" for="seoCrawlerNoSaveHtml">عدم حفظ محتوى HTML (لتوفير الذاكرة)</label></div>
+                        <div class="form-check form-switch mb-2"><input type="checkbox" class="form-check-input" id="seoCrawlerNoSaveHtml" role="switch"><label class="form-check-label small" for="seoCrawlerNoSaveHtml">عدم حفظ المحتوى الكامل (لتوفير الذاكرة)</label></div>
                         <div class="mb-2"><label class="form-label text-muted small" for="customProxyUrl">بروكسي مخصص (اختياري)</label><input class="form-control form-control-sm" type="url" dir="ltr" id="customProxyUrl" placeholder="https://my-proxy.com/?url={url}" title="استخدم بروكسي لتجاوز قيود CORS أو للزحف من IP مختلف. يجب أن يقبل البروكسي رابط الموقع كمتغير {url}."></div>
                     </div>
                     <div class="robots-section rounded-3 p-3 my-3">
@@ -143,26 +125,30 @@
                     </div>
                     <div class="mb-4"><label class="form-label" for="fileDropZone"><i aria-hidden="true" class="bi bi-file-earmark-text-fill ms-2"></i>تحليل ملفات HTML </label>
                         <div class="text-center bg-body-secondary border-2 file-drop-zone border border-dashed rounded-3 p-4 cursor-pointer" id="fileDropZone">
-                            <p class="mb-1">اسحب وأفلت ملفات HTML هنا</p><input type="file" accept=".html,.htm" class="d-none" id="htmlFileInput" multiple="">
+                            <p class="mb-1">اسحب وأفلت ملفات HTML هنا</p><input type="file" accept=".html,.htm" class="d-none" id="htmlFileInput" multiple>
                         </div>
                     </div>
                     <div class="mb-4"><label class="form-label" for="urlsFileInput"><i aria-hidden="true" class="bi bi-folder2-open ms-2"></i>استيراد جماعي <span class="badge feature-badge me-5">محسن</span></label>
-                        <div class="input-group"><input class="form-control" type="file" accept=".txt,.json" id="urlsFileInput"><button class="btn btn-secondary me-2" id="importUrlsFileBtn" type="button"><i class="bi bi-download ms-2" aria-hidden="true"></i>استيراد</button></div>
+                        <div class="input-group"><input class="form-control" type="file" accept=".txt,.json" id="urlsFileInput"><button class="btn btn-secondary me-2" id="importUrlsFileBtn" type="button" aria-label="استيراد الروابط من ملف"><i class="bi bi-download ms-2" aria-hidden="true"></i>استيراد</button></div>
                     </div>
                     <div class="mb-3"><label class="form-label" for="urlInput">روابط صفحات موقعك </label><textarea class="form-control url-textarea-drop" dir="ltr" id="urlInput" placeholder="index.html
 about.html
 services.html" rows="6"></textarea></div>
                     <div class="form-check form-switch mb-3"><input type="checkbox" class="form-check-input" id="manualInput" role="switch"><label class="form-check-label" for="manualInput">إدخال يدوي للصفحات</label></div>
                     <div class="d-none border rounded p-3 mb-3" id="manualInputSection">
-                        <div class="d-grid gap-2"><input type="text" aria-label="عنوان الصفحة اليدوي" class="form-control" id="pageTitle" placeholder="عنوان الصفحة"><input type="text" aria-label="رابط الصفحة اليدوي" class="form-control" id="pageUrl" placeholder="رابط الصفحة"><input type="text" aria-label="وصف الصفحة اليدوي" class="form-control" id="pageDescription" placeholder="وصف الصفحة"><input type="text" aria-label="فئة الصفحة اليدوية" class="form-control" id="pageCategory" placeholder="فئة الصفحة"><input type="text" aria-label="الكلمات المفتاحية اليدوية" class="form-control" id="pageTags" placeholder="الكلمات المفتاحية (مفصولة بفواصل)"><button class="btn btn-success btn-sm" id="addManualPageBtn">إضافة صفحة</button></div>
-                    </div><button class="btn btn-primary w-100" id="generateIndexBtn" type="button"><i class="bi bi-rocket-takeoff-fill ms-2" aria-hidden="true"></i>توليد فهرس البحث</button>
+                        <div class="d-grid gap-2"><input type="text" aria-label="عنوان الصفحة اليدوي" class="form-control" id="pageTitle" placeholder="عنوان الصفحة"><input type="text" aria-label="رابط الصفحة اليدوي" class="form-control" id="pageUrl" placeholder="رابط الصفحة"><input type="text" aria-label="وصف الصفحة اليدوي" class="form-control" id="pageDescription" placeholder="وصف الصفحة"><input type="text" aria-label="فئة الصفحة اليدوية" class="form-control" id="pageCategory" placeholder="فئة الصفحة"><input type="text" aria-label="الكلمات المفتاحية اليدوية" class="form-control" id="pageTags" placeholder="الكلمات المفتاحية (مفصولة بفواصل)"><button class="btn btn-success btn-sm" id="addManualPageBtn" type="button" aria-label="إضافة صفحة يدوياً">إضافة صفحة</button></div>
+                    </div><button class="btn btn-primary w-100" id="generateIndexBtn" type="button" aria-label="توليد فهرس البحث من المدخلات الحالية"><i class="bi bi-rocket-takeoff-fill ms-2" aria-hidden="true"></i>توليد فهرس البحث</button>
                     <div class="mt-4 border-top pt-3">
-                        <h3 class="h6"><i class="bi bi-folder-symlink-fill me-2" aria-hidden="true"></i>إدارة المشاريع</h3>
+                        <h3 class="h6"><i class="bi bi-folder-symlink-fill me-2" aria-hidden="true"></i>إدارة المشاريع والأدوات</h3>
                         <div class="input-group mb-2"><select class="form-select" aria-label="اختر مشروع" id="projectSelector" title="اختر مشروعًا محفوظًا لتحميله">
                                 <option value="">-- اختر مشروعًا --</option>
-                            </select><button class="btn btn-outline-danger me-2" id="deleteProjectBtn" title="حذف المشروع المختار" aria-label="حذف المشروع"><i class="bi bi-trash3-fill" aria-hidden="true"></i></button></div>
-                        <div class="input-group"><input class="form-control" type="text" aria-label="اسم المشروع" id="projectNameInput" placeholder="اسم المشروع الحالي أو الجديد"><button class="btn btn-success me-2" id="saveProjectBtn" title="حفظ المشروع" type="button"><i class="bi bi-save-fill ms-2" aria-hidden="true"></i>حفظ</button></div>
-                        <div class="d-flex justify-content-center mt-2"><button class="btn btn-link btn-sm text-decoration-none" id="clearFormBtn" title="تحذير: سيؤدي هذا إلى مسح جميع البيانات المدخلة والنتائج الحالية في هذا المشروع."><i class="bi bi-sparkles me-1" aria-hidden="true"></i>البدء من جديد (مسح الكل)</button></div>
+                            </select><button class="btn btn-outline-danger me-2" id="deleteProjectBtn" type="button" title="حذف المشروع المختار" aria-label="حذف المشروع المختار"><i class="bi bi-trash3-fill" aria-hidden="true"></i></button></div>
+                        <div class="input-group"><input class="form-control" type="text" aria-label="اسم المشروع" id="projectNameInput" placeholder="اسم المشروع الحالي أو الجديد"><button class="btn btn-success me-2" id="saveProjectBtn" title="حفظ المشروع" type="button" aria-label="حفظ المشروع الحالي"><i class="bi bi-save-fill ms-2" aria-hidden="true"></i>حفظ</button></div>
+                        <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                            <button class="btn btn-outline-info flex-grow-1" id="showVisualizerBtn" type="button" title="عرض بنية الموقع بشكل بصري"><i class="bi bi-diagram-3-fill ms-2"></i>المحلل البصري</button>
+                            <button class="btn btn-outline-warning flex-grow-1" id="showComparisonBtn" type="button" title="مقارنة لقطتين زمنيتين من مشروع"><i class="bi bi-subtract ms-2"></i>مقارنة الزحف</button>
+                        </div>
+                        <div class="d-flex justify-content-center mt-2"><button class="btn btn-link btn-sm text-decoration-none" id="clearFormBtn" type="button" title="تحذير: سيؤدي هذا إلى مسح جميع البيانات المدخلة والنتائج الحالية في هذا المشروع."><i class="bi bi-sparkles me-1" aria-hidden="true"></i>البدء من جديد (مسح الكل)</button></div>
                     </div>
                 </div>
             </div>
@@ -170,38 +156,25 @@ services.html" rows="6"></textarea></div>
         <div class="col-lg-6">
             <div class="card h-100 shadow-sm d-flex flex-column">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-    <ul id="resultsTab" class="nav nav-tabs card-header-tabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button id="results-tab-btn" class="nav-link active" data-bs-toggle="tab" data-bs-target="#results-panel" type="button" role="tab" aria-controls="results-panel" aria-selected="true">
-                <i class="bi bi-bar-chart-steps ms-2" aria-hidden="true"></i>النتائج
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button id="advisor-tab-btn" class="nav-link" data-bs-toggle="tab" data-bs-target="#advisor-panel" type="button" role="tab" aria-controls="advisor-panel" aria-selected="false">
-                <i class="bi bi-lightbulb-fill ms-2" aria-hidden="true"></i>التوصيات الذكية 
-                <span id="advisor-count" class="badge rounded-pill bg-danger d-none"></span>
-            </button>
-        </li>
-    </ul>
-    <button id="showAnalyticsBtn" class="btn btn-outline-primary btn-sm d-none" type="button" data-bs-toggle="modal" data-bs-target="#analyticsModal" aria-label="عرض التحليلات المتقدمة">
-        <i class="bi bi-bar-chart-line-fill ms-2" aria-hidden="true"></i>
-        <span class="d-none d-md-inline">عرض التحليلات</span>
-    </button>
-</div>
+                    <ul id="resultsTab" class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item" role="presentation"><button id="results-tab-btn" class="nav-link active" data-bs-toggle="tab" data-bs-target="#results-panel" type="button" role="tab" aria-controls="results-panel" aria-selected="true"><i class="bi bi-bar-chart-steps ms-2" aria-hidden="true"></i>النتائج</button></li>
+                        <li class="nav-item" role="presentation"><button id="advisor-tab-btn" class="nav-link" data-bs-toggle="tab" data-bs-target="#advisor-panel" type="button" role="tab" aria-controls="advisor-panel" aria-selected="false"><i class="bi bi-lightbulb-fill ms-2" aria-hidden="true"></i>التوصيات <span id="advisor-count" class="badge rounded-pill bg-danger d-none"></span></button></li>
+                        <li class="nav-item" role="presentation"><button id="architect-tab-btn" class="nav-link" data-bs-toggle="tab" data-bs-target="#architect-panel" type="button" role="tab" aria-controls="architect-panel" aria-selected="false"><i class="bi bi-diagram-3-fill ms-2" aria-hidden="true"></i>المهندس <span id="architect-count" class="badge rounded-pill bg-info d-none"></span></button></li>
+                    </ul>
+                    <button id="showAnalyticsBtn" class="btn btn-outline-primary btn-sm d-none" type="button" data-bs-toggle="modal" data-bs-target="#analyticsModal" aria-label="عرض التحليلات المتقدمة"><i class="bi bi-bar-chart-line-fill ms-2" aria-hidden="true"></i><span class="d-none d-md-inline"> التحليلات</span></button>
+                </div>
                 <div class="card-body d-flex flex-column flex-grow-1">
                     <div class="tab-content flex-grow-1 d-flex flex-column" id="resultsTabContent">
                         <div class="tab-pane fade show active d-flex flex-column" id="results-panel" role="tabpanel" aria-labelledby="results-tab-btn">
                             <div class="bg-body-secondary d-none border rounded-3 p-3 my-3" id="filterSection">
                                 <h3 class="h6 mb-2"><i class="bi bi-funnel-fill ms-2" aria-hidden="true"></i>تصفية النتائج</h3>
                                 <div class="d-flex flex-wrap gap-3">
-                                    <div class="input-group flex-grow-1"><select class="form-select" aria-label="تصفية حسب الفئة" id="categoryFilter">
-                                            <option value="">جميع الفئات</option>
-                                        </select><input class="form-control" type="text" aria-label="بحث بالكلمة المفتاحية" id="keywordFilter" placeholder="بحث بالكلمة المفتاحية"></div>
+                                    <div class="input-group flex-grow-1"><select class="form-select" aria-label="تصفية حسب الفئة" id="categoryFilter"><option value="">جميع الفئات</option></select><input class="form-control" type="text" aria-label="بحث بالكلمة المفتاحية" id="keywordFilter" placeholder="بحث بالكلمة المفتاحية"></div>
                                     <div class="form-check form-switch align-self-center"><input type="checkbox" class="form-check-input" id="orphanFilter" role="switch"><label class="form-check-label" for="orphanFilter">الصفحات المعزولة فقط</label></div>
                                 </div>
                             </div>
                             <div class="bg-body-tertiary d-none d-flex justify-content-between align-items-center p-2 rounded-top-2 border-bottom" id="selectionControls">
-                                <div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm" id="selectAllBtn"><i class="bi bi-check-all ms-2" aria-hidden="true"></i>تحديد الكل</button><button class="btn btn-outline-secondary btn-sm" id="deselectAllBtn"><i class="bi bi-x-lg ms-2" aria-hidden="true"></i>إلغاء تحديد الكل</button></div><span class="text-muted small">تم تحديد: <strong id="selectionCounter">0</strong></span>
+                                <div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm" id="selectAllBtn" type="button" aria-label="تحديد الكل"><i class="bi bi-check-all ms-2" aria-hidden="true"></i>تحديد الكل</button><button class="btn btn-outline-secondary btn-sm" id="deselectAllBtn" type="button" aria-label="إلغاء تحديد الكل"><i class="bi bi-x-lg ms-2" aria-hidden="true"></i>إلغاء تحديد الكل</button></div><span class="text-muted small">تم تحديد: <strong id="selectionCounter">0</strong></span>
                             </div>
                             <div class="bg-body-secondary flex-grow-1 p-1 rounded-bottom-2 overflow-y-auto" id="results" style="min-height:200px;">
                                 <div class="accordion accordion-flush" id="resultsAccordion">
@@ -209,34 +182,25 @@ services.html" rows="6"></textarea></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade d-flex flex-column" id="advisor-panel" role="tabpanel" aria-labelledby="advisor-tab-btn" style="min-height:200px;">
-                            <div class="flex-grow-1 overflow-y-auto">
-                                <p class="text-center text-body-secondary p-3" id="advisorPlaceholder">قم بتحليل موقعك أولاً للحصول على توصيات ذكية.</p>
-                                <div class="list-group list-group-flush" id="advisor-list"></div>
-                            </div>
+                        <div class="tab-pane fade" id="advisor-panel" role="tabpanel" aria-labelledby="advisor-tab-btn">
+                            <div class="flex-grow-1 overflow-y-auto"><p class="text-center text-body-secondary p-3" id="advisorPlaceholder">قم بتحليل موقعك أولاً للحصول على توصيات ذكية.</p><div class="list-group list-group-flush" id="advisor-list"></div></div>
+                        </div>
+                        <div class="tab-pane fade" id="architect-panel" role="tabpanel" aria-labelledby="architect-tab-btn">
+                            <div class="flex-grow-1 overflow-y-auto"><p class="text-center text-body-secondary p-3" id="architectPlaceholder">قم بزحف الموقع مع "حفظ المحتوى الكامل" لتفعيل مهندس الروابط.</p><div class="accordion accordion-flush" id="architect-list"></div></div>
                         </div>
                     </div>
-                    <div class="mt-auto">
-                        <div class="d-none d-flex flex-wrap gap-2 mt-3" id="exportButtons"><button class="btn btn-success flex-grow-1" id="downloadJsonBtn" title="تصدير النتائج المحددة كملف JSON"><i class="bi bi-filetype-json ms-2" aria-hidden="true"></i>JSON</button><button class="btn btn-info flex-grow-1" id="downloadCsvBtn" title="تصدير النتائج المحددة كملف CSV"><i class="bi bi-filetype-csv ms-2" aria-hidden="true"></i>CSV</button><button class="btn btn-warning flex-grow-1" id="downloadZipBtn" title="تصدير حزمة JSON و HTML"><i class="bi bi-file-zip-fill ms-2" aria-hidden="true"></i>ZIP</button><button class="btn btn-secondary flex-grow-1" id="toggleCopyBtn" title="إظهار خيارات النسخ"><i class="bi bi-clipboard-fill ms-2" aria-hidden="true"></i>نسخ</button><button class="btn btn-primary flex-grow-1" id="exportReportBtn" title="تصدير تقرير ملخص عن حالة الموقع"><i class="bi bi-file-earmark-bar-graph-fill ms-2"></i>تقرير</button></div>
-                        <div class="d-none mt-2" id="zipProgress">
-                            <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="تقدم إنشاء ZIP">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" id="zipProgressBar" style="width:0%;"></div>
-                            </div>
-                        </div>
+                    <div class="mt-auto pt-3">
+                        <div class="d-none d-flex flex-wrap gap-2" id="exportButtons"><button class="btn btn-success flex-grow-1" id="downloadJsonBtn" type="button" title="تصدير النتائج المحددة كملف JSON"><i class="bi bi-filetype-json ms-2" aria-hidden="true"></i>JSON</button><button class="btn btn-info flex-grow-1" id="downloadCsvBtn" type="button" title="تصدير النتائج المحددة كملف CSV"><i class="bi bi-filetype-csv ms-2" aria-hidden="true"></i>CSV</button><button class="btn btn-warning flex-grow-1" id="downloadZipBtn" type="button" title="تصدير حزمة JSON و HTML"><i class="bi bi-file-zip-fill ms-2" aria-hidden="true"></i>ZIP</button><button class="btn btn-secondary flex-grow-1" id="toggleCopyBtn" type="button" title="إظهار خيارات النسخ"><i class="bi bi-clipboard-fill ms-2" aria-hidden="true"></i>نسخ</button><button class="btn btn-primary flex-grow-1" id="exportReportBtn" type="button" title="تصدير تقرير ملخص عن حالة الموقع"><i class="bi bi-file-earmark-bar-graph-fill ms-2"></i>تقرير</button></div>
+                        <div class="d-none mt-2" id="zipProgress"><div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="تقدم إنشاء ZIP"><div class="progress-bar progress-bar-striped progress-bar-animated" id="zipProgressBar" style="width:0%;"></div></div></div>
                         <div class="bg-body-secondary d-none mt-2 p-3 border rounded-3" id="copyOptions">
                             <h4 class="h6">خيارات النسخ:</h4>
-                            <div class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm" data-copy-type="all"><i class="bi bi-clipboard-check-fill ms-2" aria-hidden="true"></i>نسخ كامل (JSON)</button><button class="btn btn-outline-secondary btn-sm" data-copy-type="titles"><i class="bi bi-fonts ms-2" aria-hidden="true"></i>نسخ العناوين فقط</button><button class="btn btn-outline-info btn-sm" data-copy-type="urls"><i class="bi bi-link-45deg ms-2" aria-hidden="true"></i>نسخ الروابط فقط</button><button class="btn btn-outline-success btn-sm" data-copy-type="descriptions"><i class="bi bi-card-text ms-2" aria-hidden="true"></i>نسخ الأوصاف فقط</button></div>
+                            <div class="d-grid gap-2"><button class="btn btn-outline-primary btn-sm" data-copy-type="all" type="button"><i class="bi bi-clipboard-check-fill ms-2" aria-hidden="true"></i>نسخ كامل (JSON)</button><button class="btn btn-outline-secondary btn-sm" data-copy-type="titles" type="button"><i class="bi bi-fonts ms-2" aria-hidden="true"></i>نسخ العناوين فقط</button><button class="btn btn-outline-info btn-sm" data-copy-type="urls" type="button"><i class="bi bi-link-45deg ms-2" aria-hidden="true"></i>نسخ الروابط فقط</button><button class="btn btn-outline-success btn-sm" data-copy-type="descriptions" type="button"><i class="bi bi-card-text ms-2" aria-hidden="true"></i>نسخ الأوصاف فقط</button></div>
                         </div>
                         <div class="d-none border rounded p-3 mt-3" id="schemaGeneratorSection">
                             <h3 class="h6 mb-3"><i class="bi bi-diagram-3-fill ms-2"></i>مولد بيانات Schema المنظمة <span class="badge feature-badge me-3">جديد</span></h3>
                             <div class="mb-3"><label class="form-label small" for="schemaBaseUrl">رابط الموقع الأساسي (مطلوب)</label><input class="form-control form-control-sm" type="url" dir="ltr" id="schemaBaseUrl" placeholder="https://example.com" title="الرابط الأساسي لموقعك (e.g., https://example.com) لتوليد روابط صحيحة في السكيما."></div>
-                            <div class="mb-3"><label class="form-label small" for="schemaPageType">نوع السكيما للصفحات</label><select class="form-select form-select-sm" id="schemaPageType" title="اختر نوع السكيما الافتراضي الذي سيتم تطبيقه على كل صفحة.">
-                                    <option value="WebPage" selected="">WebPage</option>
-                                    <option value="Article">Article</option>
-                                    <option value="Product">Product</option>
-                                    <option value="Service">Service</option>
-                                </select></div>
-                            <div class="mb-3"><label class="form-label small" for="schemaBaseEditor">السكيما الأساسية (Organization/WebSite)</label><textarea class="form-control form-control-sm" dir="ltr" id="schemaBaseEditor" rows="8" title="تحرير السكيما الأساسية لموقعك (Organization/WebSite). سيتم ربط كل صفحة بها."></textarea></div><button class="btn btn-primary w-100" id="generateSchemaBtn"><i class="bi bi-file-earmark-zip-fill ms-2"></i>توليد وتحميل حزمة السكيما (ZIP) </button>
+                            <div class="mb-3"><label class="form-label small" for="schemaPageType">نوع السكيما للصفحات</label><select class="form-select form-select-sm" id="schemaPageType" title="اختر نوع السكيما الافتراضي الذي سيتم تطبيقه على كل صفحة."><option value="WebPage" selected="">WebPage</option><option value="Article">Article</option><option value="Product">Product</option><option value="Service">Service</option></select></div>
+                            <div class="mb-3"><label class="form-label small" for="schemaBaseEditor">السكيما الأساسية (Organization/WebSite)</label><textarea class="form-control form-control-sm" dir="ltr" id="schemaBaseEditor" rows="8" title="تحرير السكيما الأساسية لموقعك (Organization/WebSite). سيتم ربط كل صفحة بها."></textarea></div><button class="btn btn-primary w-100" id="generateSchemaBtn" type="button" aria-label="توليد وتحميل حزمة بيانات Schema"><i class="bi bi-file-earmark-zip-fill ms-2"></i>توليد وتحميل حزمة السكيما (ZIP) </button>
                         </div>
                     </div>
                 </div>
@@ -244,9 +208,10 @@ services.html" rows="6"></textarea></div>
         </div>
     </div>
 </main>
+
 <div class="bg-body-tertiary shadow-lg d-none d-print-none position-fixed bottom-0 end-0 m-3 p-3 rounded-3" id="crawlerStatus" style="z-index:1100;width:350px;">
     <div class="d-flex justify-content-between align-items-center mb-2">
-        <h4 class="fw-bold h6 mb-0"><i class="bi bi-robot ms-2" aria-hidden="true"></i>جاري الزحف...</h4><button class="btn-close" type="button" id="hideCrawlerStatusBtn" aria-label="Close"></button>
+        <h4 class="fw-bold h6 mb-0"><i class="bi bi-robot ms-2" aria-hidden="true"></i>جاري الزحف...</h4><button class="btn-close" type="button" id="hideCrawlerStatusBtn" aria-label="إغلاق حالة الزحف"></button>
     </div>
     <div class="text-muted small mb-1" id="crawlerCurrentUrl"><span>بدء العملية...</span></div>
     <div class="progress" role="progressbar" style="height:10px;" aria-label="تقدم الزحف">
@@ -279,7 +244,7 @@ services.html" rows="6"></textarea></div>
                 <h5 class="modal-title" id="reportModalLabel"><i class="bi bi-file-earmark-text-fill ms-2"></i> تقرير ملخص عن حالة الموقع</h5><button class="btn-close me-auto ms-0" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
             </div>
             <div class="modal-body report-content" id="reportModalBody"></div>
-            <div class="modal-footer d-print-none"><button class="btn btn-secondary" data-bs-dismiss="modal" type="button">إغلاق</button><button class="btn btn-primary" id="printReportBtn" type="button"><i class="bi bi-printer-fill ms-2"></i>طباعة التقرير</button></div>
+            <div class="modal-footer d-print-none"><button class="btn btn-secondary" data-bs-dismiss="modal" type="button">إغلاق</button><button class="btn btn-primary" id="printReportBtn" type="button" aria-label="طباعة التقرير"><i class="bi bi-printer-fill ms-2"></i>طباعة التقرير</button></div>
         </div>
     </div>
 </div>
@@ -308,7 +273,7 @@ services.html" rows="6"></textarea></div>
                         </div>
                         <div class="text-center text-warning-emphasis bg-warning-subtle d-none rounded p-2 mt-3" id="orphanPagesCard">
                             <h4 class="fw-normal h6 small mb-1">صفحات معزولة</h4>
-                            <p class="fs-4 fw-bold mb-1" id="orphanPagesCount">0</p><button class="btn btn-warning btn-sm" id="viewOrphanPagesBtn">عرض الصفحات</button>
+                            <p class="fs-4 fw-bold mb-1" id="orphanPagesCount">0</p><button class="btn btn-warning btn-sm" id="viewOrphanPagesBtn" type="button" aria-label="عرض الصفحات المعزولة">عرض الصفحات</button>
                         </div>
                     </div>
                 </div>
@@ -317,6 +282,77 @@ services.html" rows="6"></textarea></div>
         </div>
     </div>
 </div>
+
+<!-- ✅ نافذة منبثقة جديدة: المحلل البصري لبنية الموقع -->
+<!-- في ملف index.html، استبدل محتوى visualizerModal بالكامل بهذا الكود -->
+<div class="modal fade" role="dialog" tabindex="-1" id="visualizerModal" aria-labelledby="visualizerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="visualizerModalLabel"><i class="bi bi-diagram-3-fill ms-2"></i> المحلل البصري لبنية الموقع</h5>
+                <button class="btn-close me-auto ms-0" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <!-- ✅ تقسيم جسم النافذة إلى جزأين -->
+            <div class="modal-body p-0 d-flex">
+                <!-- الشريط الجانبي للمعلومات -->
+                <div id="visualizer-sidebar" class="bg-body-tertiary border-start" style="width: 320px; flex-shrink: 0; overflow-y: auto;">
+                    <div class="p-3 border-bottom">
+                        <h6 id="visualizer-project-name" class="fw-bold text-primary">اسم المشروع</h6>
+                        <div class="d-flex justify-content-between text-muted small mt-2">
+                            <span>إجمالي الصفحات:</span>
+                            <strong id="visualizer-total-pages">0</strong>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted small">
+                            <span>إجمالي الروابط:</span>
+                            <strong id="visualizer-total-links">0</strong>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h6 class="mb-3">كل الصفحات</h6>
+                        <input type="search" id="visualizer-search" class="form-control form-control-sm mb-2" placeholder="ابحث عن صفحة...">
+                        <ul id="visualizer-page-list" class="list-group list-group-flush">
+                            <!-- سيتم ملء قائمة الصفحات هنا عبر JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- حاوية الرسم البياني -->
+                <div id="site-graph-container" style="flex-grow: 1; height: 100%;">
+                    <p class="text-center p-5 text-muted" id="visualizerPlaceholder">يجب زحف الموقع أولاً لعرض المخطط.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ نافذة منبثقة جديدة: مقارنة المشاريع -->
+<div class="modal fade" role="dialog" tabindex="-1" id="comparisonModal" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comparisonModalLabel"><i class="bi bi-subtract ms-2"></i> مقارنة نتائج الزحف</h5><button class="btn-close me-auto ms-0" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3 align-items-end p-3 mb-3 rounded-3 bg-body-secondary">
+                    <div class="col-md-5">
+                        <label for="projectASelector" class="form-label small">المشروع الأساسي (الأقدم)</label>
+                        <select id="projectASelector" class="form-select"></select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="projectBSelector" class="form-label small">المشروع للمقارنة (الأحدث)</label>
+                        <select id="projectBSelector" class="form-select"></select>
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button id="runComparisonBtn" class="btn btn-primary">قارن الآن</button>
+                    </div>
+                </div>
+                <div id="comparison-results-container">
+                    <p class="text-center p-5 text-muted" id="comparisonPlaceholder">اختر مشروعين للمقارنة بينهما.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <template id="resultItemTemplate" class="d-print-none">
     <div class="result-item bg-body border rounded-2 p-3 my-2" data-id="">
         <div class="result-item-header">
@@ -328,9 +364,9 @@ services.html" rows="6"></textarea></div>
                 <span class="badge bg-warning text-dark ms-2 d-none orphan-page-badge" title="هذه الصفحة معزولة، لا توجد روابط داخلية تشير إليها">صفحة معزولة</span>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn btn-outline-info btn-sm btn-preview" data-bs-toggle="modal" data-bs-target="#serpPreviewModal">معاينة</button>
-                <button class="btn btn-outline-secondary btn-sm btn-edit">تحرير</button>
-                <button class="btn btn-outline-danger btn-sm btn-delete"><i class="bi bi-trash3-fill"></i></button>
+                <button class="btn btn-outline-info btn-sm btn-preview" type="button" data-bs-toggle="modal" data-bs-target="#serpPreviewModal">معاينة</button>
+                <button class="btn btn-outline-secondary btn-sm btn-edit" type="button">تحرير</button>
+                <button class="btn btn-outline-danger btn-sm btn-delete" type="button"><i class="bi bi-trash3-fill"></i></button>
             </div>
         </div>
         <div class="result-item-url-bar">
@@ -344,23 +380,30 @@ services.html" rows="6"></textarea></div>
         <div class="seo-summary-container"></div>
     </div>
 </template>
+<!-- Scripts -->
 <script src="assets/bootstrap/js/bootstrap.min.js" defer></script>
 <script src="assets/js/aos.min.js" defer></script>
-<script src="assets/js/lottie-player.min.js" defer></script>
 <script src="assets/js/bs-init.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<!-- ✅ إضافة مكتبات JS الجديدة -->
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js" defer></script>
+<script src="assets/js/ComparisonEngine.js" defer></script>
+<script src="assets/js/SiteVisualizer.js" defer></script>
+<!-- ... -->
 <script src="assets/js/advisor.js" defer></script>
+<script src="assets/js/storage.js" defer></script>
+<script src="assets/js/LinkArchitect.js" defer></script>
+<!-- ملاحظة: لا داعي لتحميل worker.js هنا، هو يُستدعى من LinkArchitect.js -->
 <script src="assets/js/script.js" defer></script>
 <script>
-        (function() {
-            // Load Bootstrap Icons dynamically to avoid blocking rendering
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css';
-            document.head.appendChild(link);
-        })();
-    </script>
+    (function() {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css';
+        document.head.appendChild(link);
+    })();
+</script>
 </body>
 
 </html>

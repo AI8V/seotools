@@ -298,10 +298,9 @@
     --bs-btn-active-color: var(--bs-white);
 }
 
-/* 2. Improve contrast for .text-muted */
-.text-muted {
-    --bs-text-opacity: 1;
-    color: var(--bs-secondary-color) !important;
+
+#advisor-list .list-group-item .text-muted {
+  color: var(--bs-secondary-text-emphasis);
 }
 
 /* Small spacing adjustment for the moved analytics button */
@@ -309,6 +308,67 @@
     margin-inline-start: 1rem;
 }
 
-[data-bs-theme="dark"] .text-muted {
-    color: var(--bs-tertiary-color) !important;
+/* ✅ FIX: Crawler status panel overflow issue */
+#crawlerCurrentUrl {
+  overflow-wrap: break-word; /* Standard property to break long words */
+  word-wrap: break-word;     /* Older property for legacy browser support */
+  word-break: break-all;     /* More aggressive breaking for stubborn cases */
+  
+  /* Improvement: Prevent the element from becoming too large */
+  max-width: 100%;
+  
+  /* Improvement: Use hyphens for better readability on break */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+
+/* ✅ NEW: Site Visualizer Styles */
+#site-graph-container {
+    position: relative;
+    background-color: var(--bs-tertiary-bg);
+}
+
+/* ✅ NEW: Comparison Report Styles */
+.comparison-card {
+    border-color: var(--bs-border-color-translucent);
+}
+
+.comparison-card .list-group-item {
+    background-color: transparent;
+}
+
+.comparison-card .badge {
+    font-size: 0.9em;
+    padding: 0.4em 0.6em;
+}
+
+
+
+/* ✅ NEW: Site Visualizer Sidebar Styles */
+#visualizer-sidebar .list-group-item {
+    padding: 0.5rem 0.25rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    border-color: var(--bs-border-color-translucent);
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#visualizer-sidebar .list-group-item:hover {
+    background-color: var(--bs-secondary-bg-subtle);
+}
+
+#visualizer-sidebar .list-group-item.active {
+    background-color: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+    border-right: 3px solid var(--bs-primary);
+}
+
+/* في assets/css/styles.css */
+
+.accordion-collapse {
+  max-height: 45vh; 
+  overflow-y: auto;
 }
