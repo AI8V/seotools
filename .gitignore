@@ -12,7 +12,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# مجلدات البناء أو التوزيع (إذا كنت ستستخدمها لاحقًا)
+# مجلدات البناء أو التوزيع 
 # /dist
 # /build
 # /out
@@ -23,7 +23,7 @@ lerna-debug.log*
 *.sublime-workspace
 *.sublime-project
 
-# ملفات أخرى خاصة بمشاريع Node.js (اختياري لكن جيد)
+# ملفات أخرى خاصة بمشاريع Node.js 
 .npm
 .eslintcache
 .env
