@@ -2,11 +2,8 @@
  * @jest-environment jsdom
  */
 
-// ✅ THE FIX: Mocks are now in jest.setup.js, so we only need to require the script.
-// The require statement now comes after all mocks have been globally established by Jest.
 const { UIManager, StateManager, DOMManager, Analyzer, Utils } = require('../assets/js/script.js');
 
-// ✅ الخطوة 1: إنشاء بيانات وهمية كاملة وقابلة لإعادة الاستخدام
 const createMockSeoData = (overrides = {}) => ({
     h1: 'Mock H1',
     lang: 'en',
@@ -27,7 +24,6 @@ const createMockSeoData = (overrides = {}) => ({
     ...overrides
 });
 
-// Helper to set up a simplified DOM for each test
 const setupTestDOM = () => {
     document.documentElement.innerHTML = `
         <html data-bs-theme="light">
@@ -240,11 +236,7 @@ describe('UIManager Module', () => {
     });
     
     describe('Analytics Dashboard', () => {
-        // ✅ تعطيل الاختبار    
     it.skip('should call renderChart with correct data for each chart type', () => {
-        // NOTE: This test is skipped because it's difficult to reliably mock
-        // the full rendering lifecycle of Chart.js within JSDOM.
-        // The core logic is implicitly tested by the app's functionality in a real browser.
             StateManager.appState.searchIndex = [
                 { id: 1, source: 'seo_crawler', tags: ['seo', 'test'], seo: {h1: 't', canonical: 't', imageAltInfo: {total: 1, missing: 0}, brokenLinksOnPage: [], isNoIndex: false, lang: 'en', ogTitle: 't', ogImage: 't', hasStructuredData: true, wordCount: 500, pageTypeHint: 'article'} }, // score 9
                 { id: 2, source: 'manual', tags: ['manual', 'test'], seo: {h1: 't', canonical: null, imageAltInfo: {total: 0, missing: 0}, brokenLinksOnPage: [], isNoIndex: false, lang: 'en', ogTitle: null, ogImage: null, hasStructuredData: false, wordCount: 10, pageTypeHint: 'generic'} }, // score 3
