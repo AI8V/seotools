@@ -189,7 +189,6 @@ const exportedModules = (function () {
             DOM.dom.categoryFilter.innerHTML = '<option value="">جميع الفئات</option>';
             categories.forEach(cat => DOM.dom.categoryFilter.add(new Option(cat, cat, false, cat === currentCategory)));
         };
-        // في UIManager -> renderSeoSummary
 
 function renderSeoSummary(seo, itemId) {
     if (!seo) return '';
@@ -202,7 +201,6 @@ function renderSeoSummary(seo, itemId) {
         else if (seo.internalLinkEquity > 3) badgeType = 'info';
         equityBadge = `<div class="seo-summary-item"><strong>قوة الصفحة:</strong> ${createBadge(seo.internalLinkEquity, badgeType, 'قوة الربط الداخلي: عدد الروابط الداخلية التي تشير لهذه الصفحة.')}</div>`;
     }
-    // ✅ الإصلاح هنا: استخدام Optional Chaining (?.)
     return `<div class="mt-2 pt-2 border-top border-opacity-10"><strong class="small text-body-secondary d-block mb-1">SEO أساسي:</strong><div class="seo-summary-item"><strong>نوع الصفحة:</strong> ${createBadge(pageTypeLabels[seo.pageTypeHint] || 'غير محدد', 'primary')}</div>${equityBadge}<div class="seo-summary-item"><strong>H1:</strong> ${createBadge(seo.h1 ? 'موجود' : 'مفقود', seo.h1 ? 'success' : 'danger')}</div><div class="seo-summary-item"><strong>Lang:</strong> ${createBadge(seo.lang || 'مفقود', seo.lang ? 'success' : 'danger')}</div><div class="seo-summary-item"><strong>Canonical:</strong> ${createBadge(seo.canonical ? 'موجود' : 'مفقود', seo.canonical ? 'success' : 'danger')}</div><div class="seo-summary-item"><strong>Img Alt:</strong> ${(seo.imageAltInfo?.total || 0) === 0 ? createBadge('لا يوجد', 'secondary') : createBadge(`${seo.imageAltInfo.total - seo.imageAltInfo.missing}/${seo.imageAltInfo.total}`, seo.imageAltInfo.missing === 0 ? 'success' : 'warning')}</div><div class="seo-summary-item"><strong>روابط مكسورة:</strong> ${seo.brokenLinksOnPage?.length > 0 ? `<span class="badge bg-danger cursor-pointer" data-bs-toggle="collapse" href="#brokenLinks-${itemId}">${seo.brokenLinksOnPage.length}</span><div class="collapse mt-2" id="brokenLinks-${itemId}"><ul class="list-group list-group-flush small">${seo.brokenLinksOnPage.map(l => `<li class="list-group-item list-group-item-danger py-1 px-2 text-break">${l}</li>`).join('')}</ul></div>` : createBadge('0', 'success')}</div><div class="seo-summary-item"><strong>OG Tags:</strong> ${createBadge(seo.ogTitle && seo.ogImage ? 'موجود' : 'ناقص', seo.ogTitle && seo.ogImage ? 'success' : 'warning', 'OG:Title/Image')}</div><div class="seo-summary-item"><strong>بيانات منظمة:</strong> ${createBadge(seo.hasStructuredData ? 'موجود' : 'مفقود', seo.hasStructuredData ? 'success' : 'secondary')}</div><div class="seo-summary-item"><strong>عدد الكلمات:</strong> ${createBadge(seo.wordCount || 0, (seo.wordCount || 0) > 300 ? 'success' : 'warning')}</div></div>`;
 }
         const handleIntersection = (entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const sentinel = entry.target; scrollObserver.unobserve(sentinel); handleLoadMore(sentinel); } }); };
@@ -551,11 +549,8 @@ const ProjectManager = (function (State, UI, Utils) {
 })(StateManager, UIManager, Utils);
 
 
-    // In file: script.js
-// Replace the entire `CoreFeatures` module with this correct version.
-
     // ===================================================================================
-    // MODULE: CoreFeatures (THE DEFINITIVELY CORRECT AND FINAL VERSION)
+    // MODULE: CoreFeatures
     // ===================================================================================
     const CoreFeatures = (function (State, DOM, Analyzer, DataHandler, UI, Utils, ProjectManager) {
         
@@ -938,15 +933,11 @@ const ProjectManager = (function (State, UI, Utils) {
             const config = UI.getSeoCrawlerConfig();
             if (!config.baseUrl) return;
 
-            // ✅ NEW CLEAN FLOW:
-            // 1. Prepare the state and UI for a new crawl
             StateManager.resetAppState();
             UI.updateAllUI(); // Update UI to show it's empty
 
-            // 2. Run the crawler (which now only shows its own status panel)
             await Core.startSeoCrawler(config);
 
-            // 3. After the crawl is completely finished, update everything
             UI.updateAllUI(); // Update UI with the new results
             updateAdvisorTasks();
             await runLinkArchitect();
