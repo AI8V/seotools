@@ -4,34 +4,26 @@
 
 const scriptModules = require('../assets/js/script.js');
 const { DataHandler, StateManager, Analyzer: AnalyzerForDataHandler } = scriptModules;
-// لا نستورد UIManager مباشرة هنا لأننا سنقوم بعمل spy عليه عبر scriptModules
 
 describe('DataHandler Module', () => {
-    let getFilterStateSpy; // عرّف الـ spy هنا ليكون متاحًا في النطاق
+    let getFilterStateSpy; 
 
     beforeEach(() => {
         StateManager.resetAppState();
 
-        // تأكد أن UIManager و getFilterState موجودان قبل عمل spy
         if (scriptModules.UIManager && typeof scriptModules.UIManager.getFilterState === 'function') {
-            // أنشئ الـ spy (أو أعد إنشائه إذا لزم الأمر) وقم بتعيين تطبيق mock
             getFilterStateSpy = jest.spyOn(scriptModules.UIManager, 'getFilterState').mockImplementation(() => ({
                 category: '',
                 keyword: '',
                 isOrphan: false
             }));
         } else {
-            // هذا الشرط يجب ألا يتحقق إذا كان script.js يُصدّر UIManager بشكل صحيح
-            // وإذا كان UIManager يحتوي على دالة getFilterState.
-            // إذا حدث هذا، فهناك مشكلة أعمق في تصدير UIManager من script.js
+
             console.error("UIManager أو UIManager.getFilterState غير موجود في scriptModules عند محاولة عمل spy.");
-            // يمكنك اختيار رمي خطأ هنا إذا كان هذا يعتبر حالة فشل حرجة للاختبارات
-            // throw new Error('UIManager or getFilterState is not available for spying.');
         }
     });
 
     afterEach(() => {
-        // أعد الدالة الأصلية بعد كل اختبار إذا تم إنشاء الـ spy
         if (getFilterStateSpy) {
             getFilterStateSpy.mockRestore();
         }
@@ -163,7 +155,6 @@ describe('DataHandler Module', () => {
             const selected = DataHandler.getSelectedItems(); 
             expect(selected.length).toBe(2);
             expect(selected.map(i => i.id)).toEqual([1, 2]);
-            // التأكد من أن الـ spy تم استدعاؤه
             expect(getFilterStateSpy).toHaveBeenCalledTimes(1); 
         });
 
@@ -183,7 +174,6 @@ describe('DataHandler Module', () => {
         });
 
         it('should use filteredResults if filters are active (mocked)', () => {
-            // غيّر قيمة الـ mock لهذا الاختبار فقط
             getFilterStateSpy.mockReturnValueOnce({ 
                 category: 'TestCat', 
                 keyword: 'test', 
