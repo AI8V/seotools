@@ -285,8 +285,6 @@ services.html" rows="6"></textarea></div>
     </div>
 </div>
 
-<!-- ✅ نافذة منبثقة جديدة: المحلل البصري لبنية الموقع -->
-<!-- في ملف index.html، استبدل محتوى visualizerModal بالكامل بهذا الكود -->
 <div class="modal fade" role="dialog" tabindex="-1" id="visualizerModal" aria-labelledby="visualizerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
@@ -294,9 +292,7 @@ services.html" rows="6"></textarea></div>
                 <h5 class="modal-title" id="visualizerModalLabel"><i class="bi bi-diagram-3-fill ms-2"></i> المحلل البصري لبنية الموقع</h5>
                 <button class="btn-close me-auto ms-0" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
             </div>
-            <!-- ✅ تقسيم جسم النافذة إلى جزأين -->
             <div class="modal-body p-0 d-flex">
-                <!-- الشريط الجانبي للمعلومات -->
                 <div id="visualizer-sidebar" class="bg-body-tertiary border-start" style="width: 320px; flex-shrink: 0; overflow-y: auto;">
                     <div class="p-3 border-bottom">
                         <h6 id="visualizer-project-name" class="fw-bold text-primary">اسم المشروع</h6>
@@ -313,11 +309,9 @@ services.html" rows="6"></textarea></div>
                         <h6 class="mb-3">كل الصفحات</h6>
                         <input type="search" id="visualizer-search" class="form-control form-control-sm mb-2" placeholder="ابحث عن صفحة...">
                         <ul id="visualizer-page-list" class="list-group list-group-flush">
-                            <!-- سيتم ملء قائمة الصفحات هنا عبر JavaScript -->
                         </ul>
                     </div>
                 </div>
-                <!-- حاوية الرسم البياني -->
                 <div id="site-graph-container" style="flex-grow: 1; height: 100%;">
                     <p class="text-center p-5 text-muted" id="visualizerPlaceholder">يجب زحف الموقع أولاً لعرض المخطط.</p>
                 </div>
@@ -326,7 +320,6 @@ services.html" rows="6"></textarea></div>
     </div>
 </div>
 
-<!-- ✅ نافذة منبثقة جديدة: مقارنة المشاريع -->
 <div class="modal fade" role="dialog" tabindex="-1" id="comparisonModal" aria-labelledby="comparisonModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -388,15 +381,12 @@ services.html" rows="6"></textarea></div>
 <script src="assets/js/bs-init.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-<!-- ✅ إضافة مكتبات JS الجديدة -->
 <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js" defer></script>
 <script src="assets/js/ComparisonEngine.js" defer></script>
 <script src="assets/js/SiteVisualizer.js" defer></script>
-<!-- ... -->
 <script src="assets/js/advisor.js" defer></script>
 <script src="assets/js/storage.js" defer></script>
 <script src="assets/js/LinkArchitect.js" defer></script>
-<!-- ملاحظة: لا داعي لتحميل worker.js هنا، هو يُستدعى من LinkArchitect.js -->
 <script src="assets/js/script.js" defer></script>
 <script>
     (function() {
