@@ -1,10 +1,8 @@
-// In file: __tests__/integration.test.js (Final, Corrected Version)
 
 /**
  * @jest-environment jsdom
  */
 
-// Mock the modules we want to control
 jest.mock('../assets/js/script.js', () => {
     const originalModule = jest.requireActual('../assets/js/script.js');
     return {
@@ -18,7 +16,6 @@ jest.mock('../assets/js/script.js', () => {
 
 describe('Full Application Integration Scenarios', () => {
     
-    // Get modules after they are mocked
     const { 
         DOMManager,
         UIManager, 
@@ -57,10 +54,7 @@ describe('Full Application Integration Scenarios', () => {
     });
 
     it('should call startSeoCrawler with correct config when triggered', async () => {
-        // Simulate the real event handler's logic
         const config = UIManager.getSeoCrawlerConfig();
-        // Since we are not testing the event handler itself, but the integration,
-        // we directly call the mocked function with the config we just got.
         await CoreFeatures.startSeoCrawler(config);
         
         // Assertions
