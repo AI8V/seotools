@@ -1,5 +1,3 @@
-// /__tests__/SiteVisualizer.test.js (النسخة النهائية والمُصلحة)
-
 /**
  * @jest-environment jsdom
  */
@@ -17,7 +15,6 @@ describe('SiteVisualizer Module', () => {
 
         const { nodes, edges } = createGraphData(searchIndex);
 
-        // تم حذف .get() لأن الـ Mock الخاص بنا لا يزال يُرجع مصفوفات
         expect(nodes.length).toBe(4); 
         expect(nodes.find(n => n.id === '/').value).toBe(2);
         expect(nodes.find(n => n.id === '/orphan').value).toBe(1);
