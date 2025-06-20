@@ -43,7 +43,7 @@ const exportedModules = (function () {
         }
         function getProxyUrl(targetUrl) {
             const customProxy = DOM.dom.customProxyUrl && DOM.dom.customProxyUrl.value.trim();
-            return customProxy ? customProxy.replace('{url}', encodeURIComponent(targetUrl)) : `https://cors-anywhere.herokuapp.com/${targetUrl}`;
+            return customProxy ? customProxy.replace('{url}', encodeURIComponent(targetUrl)) : `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
         }
         const downloadFile = (blob, filename) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href); };
         const readFileContent = (file) => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = e => resolve(e.target.result); reader.onerror = reject; reader.readAsText(file); });
