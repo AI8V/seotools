@@ -276,23 +276,21 @@ function renderSeoSummary(seo, itemId) {
                 const collapseId = `collapse-source-${source.replace(/[^a-zA-Z0-9]/g, '-')}-${index}`;
                 const shouldBeOpen = openAccordionId ? (collapseId === openAccordionId) : index === 0;
                 renderAccordionGroup(source, items, index, shouldBeOpen);
-                //if (shouldBeOpen) {
-                 //   const accordionBody = DOM.dom.resultsAccordion.querySelector(`#${collapseId} .accordion-body`);
-                   // if (accordionBody) { renderItemChunk(accordionBody, items, 0); }
-               // }
+                if (shouldBeOpen) {
+                    const accordionBody = DOM.dom.resultsAccordion.querySelector(`#${collapseId} .accordion-body`);
+                    if (accordionBody) { renderItemChunk(accordionBody, items, 0); }
+                }
             });
             updateSelectionUI();
         }
-                const handleAccordionShow = (event) => {
-                    const accordionBody = event.target.querySelector('.accordion-body');
-                    if (!accordionBody) return;
-                    const hasBeenRendered = parseInt(accordionBody.dataset.renderedCount, 10) > 0;
-                    if (!hasBeenRendered) {
+        const handleAccordionShow = (event) => {
+            const accordionBody = event.target.querySelector('.accordion-body');
+            if (!accordionBody) return;
+            const hasBeenRendered = parseInt(accordionBody.dataset.renderedCount, 10) > 0;
+            if (!hasBeenRendered) {
                 const source = accordionBody.dataset.source;
                 const items = (getFilterState().keyword || getFilterState().category || getFilterState().isOrphan ? State.appState.filteredResults : State.appState.searchIndex).filter(item => (item.source || 'unknown') === source);
-                if(items.length > 0) {
-                    renderItemChunk(accordionBody, items, 0);
-                }
+                if(items.length > 0) { renderItemChunk(accordionBody, items, 0); }
             }
         };
         function getCurrentActiveItemsList() {
@@ -483,10 +481,11 @@ function renderSeoSummary(seo, itemId) {
         return { addItemsToIndex, generateSearchIndexFromInputs, addManualPage, deleteItem, getSelectedItems };
     })(StateManager, Analyzer, UIManager);
 
- // ===================================================================================
-// MODULE: ProjectManager
-// ===================================================================================
-const ProjectManager = (function (State, UI, Utils) {
+    
+    // ===================================================================================
+    // MODULE: ProjectManager
+    // ===================================================================================
+    const ProjectManager = (function (State, UI, Utils) {
     let saveTimeout;
     function getProjectDataForSave(projectName) {
         const projectData = JSON.parse(JSON.stringify(State.appState));
@@ -552,7 +551,7 @@ const ProjectManager = (function (State, UI, Utils) {
 
 
     // ===================================================================================
-    // MODULE: CoreFeatures
+    // MODULE: CoreFeatures 
     // ===================================================================================
     const CoreFeatures = (function (State, DOM, Analyzer, DataHandler, UI, Utils, ProjectManager) {
         
@@ -935,11 +934,14 @@ const ProjectManager = (function (State, UI, Utils) {
             const config = UI.getSeoCrawlerConfig();
             if (!config.baseUrl) return;
 
+            // 1. Prepare the state and UI for a new crawl
             StateManager.resetAppState();
             UI.updateAllUI(); // Update UI to show it's empty
 
+            // 2. Run the crawler (which now only shows its own status panel)
             await Core.startSeoCrawler(config);
 
+            // 3. After the crawl is completely finished, update everything
             UI.updateAllUI(); // Update UI with the new results
             updateAdvisorTasks();
             await runLinkArchitect();
