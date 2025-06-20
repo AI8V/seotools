@@ -6,7 +6,6 @@ const { Analyzer } = require('../assets/js/script.js');
 describe('Analyzer Module', () => {
 
     describe('analyzeHtmlContent', () => {
-        // ... (لا تغيير هنا، هذه الاختبارات ناجحة) ...
         it('should correctly parse a basic HTML page', () => {
             const html = `
                 <!DOCTYPE html>
@@ -89,7 +88,6 @@ describe('Analyzer Module', () => {
         });
 
         it('should return a "needs review" score for a poorly-optimized page', () => {
-            // تعديل: جعل البيانات أكثر سوءًا لنتوقع 0 أو قيمة منخفضة جدًا بشكل مؤكد
             const seo = { 
                 h1: null, 
                 canonical: null,
@@ -104,14 +102,6 @@ describe('Analyzer Module', () => {
                 pageTypeHint: 'generic'
             };
             const { score, level, color } = Analyzer.calculateSeoScore(seo);
-            // بما أن isNoIndex: true، هذا وحده قد يجعل بعض المقاييس غير ذات أهمية.
-            // ومع ذلك، لنفترض أننا نريد أن تكون النتيجة 0 لهذه الحالة.
-            // النتيجة الفعلية ستعتمد على كيفية حساب الدالة للنقاط بالضبط.
-            // إذا كان `!seo.isNoIndex` يعطي نقطة، فهذا الاختبار لن يحصل عليها.
-            // إذا كان `brokenLinksOnPage.length === 0` يعطي نقطة، فهذا الاختبار لن يحصل عليها.
-            // إذا كانت الدالة لا تزال تعطي نتيجة غير صفرية، يجب مراجعة الدالة أو توقع الاختبار.
-            // بناءً على المنطق الحالي (الذي يعطي نقطتين لـ !isNoIndex و brokenLinksOnPage فارغة):
-            // الآن مع isNoIndex: true و brokenLinksOnPage غير فارغة، يجب أن تكون النتيجة 0.
             expect(score).toBe(0); // <--- تغيير هنا إذا كان المنطق يعطي نتيجة مختلفة
             expect(level).toBe('يحتاج لمراجعة');
             expect(color).toBe('#dc3545');
@@ -132,8 +122,7 @@ describe('Analyzer Module', () => {
             const url = '/blog/my-first-post.html';
             const tags = Analyzer.extractTagsFromUrl(url);
             expect(tags).toContain('blog');
-            // expect(tags).toContain('my'); // <--- تم التعليق/الحذف لأن "my" أقل من 3 أحرف
-            expect(tags).not.toContain('my'); // <--- إضافة هذا التأكيد
+            expect(tags).not.toContain('my'); 
             expect(tags).toContain('first');
             expect(tags).toContain('post');
             expect(tags).toContain('مدونة');
@@ -149,8 +138,6 @@ describe('Analyzer Module', () => {
         });
 
         it('should return an empty array for root or invalid URLs', () => {
-            // تعديل: بناءً على المنطق الحالي، "/" تُرجع مصفوفة فارغة
-            // إذا كنت تريد أن تُرجع ["الرئيسية"]، يجب تعديل الدالة extractTagsFromUrl
             expect(Analyzer.extractTagsFromUrl('/')).toEqual(['الرئيسية']); 
             expect(Analyzer.extractTagsFromUrl('')).toEqual([]);
             expect(Analyzer.extractTagsFromUrl(null)).toEqual([]);
